@@ -58,7 +58,7 @@ test('single rejection', (t) => {
 	t.plan(1)
 	const err = new Error()
 	join(Promise.reject(err), () => t.fail()).catch((_err) =>
-		t.equal(_err, err)
+		t.equal(_err, err),
 	)
 })
 
@@ -66,15 +66,15 @@ test('multiple rejections', (t) => {
 	t.plan(1)
 	const errA = new Error()
 	const errB = new Error()
-	join(Promise.reject(errA), Promise.reject(errB), () =>
-		t.fail()
-	).catch((_err) => t.equal(_err, errA))
+	join(Promise.reject(errA), Promise.reject(errB), () => t.fail()).catch(
+		(_err) => t.equal(_err, errA),
+	)
 })
 
 test('both resolved and rejected', (t) => {
 	t.plan(1)
 	const err = new Error()
-	join(Promise.resolve(1), Promise.reject(err), () =>
-		t.fail()
-	).catch((_err) => t.equal(_err, err))
+	join(Promise.resolve(1), Promise.reject(err), () => t.fail()).catch(
+		(_err) => t.equal(_err, err),
+	)
 })
