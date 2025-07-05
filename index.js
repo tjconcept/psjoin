@@ -1,6 +1,4 @@
-'use strict'
-
-module.exports = (...args) => {
+export default (...args) => {
 	const fn = args.at(-1)
 	if (args.length < 2) {
 		throw new Error('At least two arguments must be passed')

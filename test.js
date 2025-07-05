@@ -1,7 +1,5 @@
-'use strict'
-
-const test = require('tape')
-const join = require('./')
+import test from 'tape'
+import join from './index.js'
 
 test((t) => {
 	t.plan(1)

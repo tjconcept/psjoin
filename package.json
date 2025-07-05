@@ -1,9 +1,10 @@
 {
 	"name": "psjoin",
 	"version": "1.0.0",
+	"type": "module",
 	"repository": "tjconcept/psjoin",
 	"scripts": {
-		"test": "node test"
+		"test": "node test.js"
 	},
 	"devDependencies": {
 		"tape": "^5.6.1"
