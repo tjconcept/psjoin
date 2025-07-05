@@ -20,24 +20,24 @@ test('a promise is returned', (t) => {
 	join(1, () => 2).then((r) => t.equal(r, 2))
 })
 
-test('no arguments', (t) => {
-	t.throws(() => join(), /At least two arguments must be passed/)
-	t.end()
+test('no arguments', async (t) => {
+	await rejects(t, join(), 'At least two arguments must be passed')
 })
 
-test('one non-function argument', (t) => {
-	t.throws(() => join('abc'), /At least two arguments must be passed/)
-	t.end()
+test('one non-function argument', async (t) => {
+	await rejects(t, join('abc'), 'At least two arguments must be passed')
 })
 
-test('two non-function arguments', (t) => {
-	t.throws(() => join('abc', 'cde'), /Missing expected function argument/)
-	t.end()
+test('two non-function arguments', async (t) => {
+	await rejects(t, join('abc', 'cde'), 'Missing expected function argument')
 })
 
-test('one function argument', (t) => {
-	t.throws(() => join(() => {}), /At least two arguments must be passed/)
-	t.end()
+test('one function argument', async (t) => {
+	await rejects(
+		t,
+		join(() => {}),
+		'At least two arguments must be passed',
+	)
 })
 
 test('mixed value types (promise and not)', (t) => {
@@ -78,3 +78,9 @@ test('both resolved and rejected', (t) => {
 		(_err) => t.equal(_err, err),
 	)
 })
+
+async function rejects(t, promise, expectedMessage, message = 'rejected') {
+	return promise.catch((err) => {
+		t.ok(err instanceof Error && err.message === expectedMessage, message)
+	})
+}
